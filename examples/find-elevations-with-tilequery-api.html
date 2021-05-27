@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Display driving directions</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../.env"></script>
+    <script src="https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.js"></script>
+    <link
+      href="https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .eleInfo {
+        position: absolute;
+        background-color: #fff;
+        z-index: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="eleInfo">
+      <div>Longitude: <span id="lng"></span></div>
+      <div>Latitude: <span id="lat"></span></div>
+      <div>Elevation: <span id="ele"></span></div>
+    </div>
+    <div id="map"></div>
+
+    <script>
+      var lngDisplay = document.getElementById("lng");
+      var latDisplay = document.getElementById("lat");
+      var eleDisplay = document.getElementById("ele");
+
+      lngDisplay.textContent = "Please click on map.";
+      latDisplay.textContent = "-";
+      eleDisplay.textContent = "-";
+
+      var map = new maplibregl.Map({
+        container: "map",
+        style:
+          "https://api.maptiler.com/maps/streets/style.json?key=" +
+          config.MAPTILER_TOKEN,
+        center: [86.925278, 27.988056],
+        zoom: 15,
+      });
+
+      function getElevation(lng, lat) {
+        // https://github.com/Jorl17/open-elevation
+        var query =
+          "https://api.open-elevation.com/api/v1/lookup\?locations\=" +
+          lat +
+          "," +
+          lng;
+        axios
+          .get(query)
+          .then(function (response) {
+            eleDisplay.textContent =
+              response.data.results[0].elevation + " Meter";
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            // immer
+          });
+      }
+
+      map.on("click", function (e) {
+        lng = e.lngLat.lng;
+        lat = e.lngLat.lat;
+        lngDisplay.textContent = lng.toFixed(4) + "°";
+        latDisplay.textContent = lat.toFixed(4) + "°";
+        eleDisplay.textContent = "Please wait ...";
+        getElevation(e.lngLat.lng, e.lngLat.lat);
+      });
+    </script>
+  </body>
+</html>

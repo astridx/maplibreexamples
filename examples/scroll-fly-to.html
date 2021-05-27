@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mayen in der Eifel</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src='../.env'></script>
+    <script src='https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.css' rel='stylesheet' />    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        #map {
+            position: fixed;
+            width: 50%;
+        }
+
+        #features {
+            width: 50%;
+            margin-left: 50%;
+            font-family: sans-serif;
+            overflow-y: scroll;
+            background-color: #fafafa;
+        }
+
+        section {
+            padding: 25px 50px;
+            line-height: 25px;
+            border-bottom: 1px solid #ddd;
+            opacity: 0.25;
+            font-size: 13px;
+        }
+
+        section.active {
+            opacity: 1;
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 200px;
+        }
+    </style>
+
+    <div id="map"></div>
+    <div id="features">
+        <section id="genovevaburg" class="active">
+            <h3>Genovevaburg</h3>
+            <p>
+                <img <a title="Wolkenkratzer / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Genovevaburg_005x.jpg"><img width="512"
+                    alt="Genovevaburg 005x"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Genovevaburg_005x.jpg/512px-Genovevaburg_005x.jpg"></a>
+                Eingebunden in die <a href="/wiki/Mittelalter" title="Mittelalter">mittelalterliche</a> Stadtbefestigung
+                erhebt sich die <b>Genovevaburg</b> an der Südwestseite der Stadt <a href="/wiki/Mayen"
+                    title="Mayen">Mayen</a> in <a href="/wiki/Rheinland-Pfalz"
+                    title="Rheinland-Pfalz">Rheinland-Pfalz</a>. Die <a href="/wiki/Burg" title="Burg">Burg</a> ist das
+                <a href="/wiki/Wahrzeichen" title="Wahrzeichen">Wahrzeichen</a> Mayens und wurde seit ihrer ersten
+                Zerstörung im Jahr 1689 mehrfach rekonstruierend wiederaufgebaut.
+            </p>
+            <small id="citation">
+                Seite „Genovevaburg“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 7. Juni 2020, 18:09 UTC.
+                URL: https://de.wikipedia.org/w/index.php?title=Genovevaburg&oldid=200730302 (Abgerufen: 10. Oktober
+                2020, 12:54 UTC).
+                <small>
+        </section>
+        <section id="pfarrkirche-herz-jesu">
+            <h3>Herz-Jesu-Kirche</h3>
+            <p>
+                <img <a title="Blueduck4711 / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Herz-jesu-tuerme-mayen.jpg"><img width="512"
+                    alt="Herz-jesu-tuerme-mayen"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Herz-jesu-tuerme-mayen.jpg/512px-Herz-jesu-tuerme-mayen.jpg"></a>
+                Die <a href="/wiki/R%C3%B6misch-katholische_Kirche" title="Römisch-katholische Kirche">katholische</a>
+                <a href="/wiki/Pfarrkirche" title="Pfarrkirche">Pfarrkirche</a> <b>Herz Jesu</b> (<span class="noprint"
+                    style="white-space:nowrap;"><span class="noprint noviewer"><a
+                            href="/wiki/Datei:LL-Q188_(deu)-Sebastian_Wallroth-Herz-Jesu-Kirche.wav"
+                            title="Audio-Datei / Hörbeispiel"><img alt="Audio-Datei / Hörbeispiel"
+                                src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/12px-Loudspeaker.svg.png"
+                                decoding="async"
+                                srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/18px-Loudspeaker.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/24px-Loudspeaker.svg.png 2x"
+                                data-file-width="20" data-file-height="20" width="12" height="12"></a></span> <span
+                        style="white-space:initial;"><a
+                            href="//upload.wikimedia.org/wikipedia/commons/8/84/LL-Q188_%28deu%29-Sebastian_Wallroth-Herz-Jesu-Kirche.wav"
+                            class="internal"
+                            title="LL-Q188 (deu)-Sebastian Wallroth-Herz-Jesu-Kirche.wav">anhören</a></span><sup><a
+                            href="/wiki/Hilfe:Audio" title="Hilfe:Audio"><span title="Hilfe – Audio">?</span></a>/<a
+                            href="/wiki/Datei:LL-Q188_(deu)-Sebastian_Wallroth-Herz-Jesu-Kirche.wav"
+                            title="Datei:LL-Q188 (deu)-Sebastian Wallroth-Herz-Jesu-Kirche.wav"><span
+                                title="Tondateibeschreibungsseite mit Lizenzangabe für „LL-Q188 (deu)-Sebastian Wallroth-Herz-Jesu-Kirche.wav“"
+                                style="font-family:monospace;">i</span></a></sup></span>) mit ihren zwei massiven
+                Glockentürmen zählt zu den markanten Bauwerken der rheinland-pfälzischen Stadt <a href="/wiki/Mayen"
+                    title="Mayen">Mayen</a> (<a href="/wiki/Landkreis_Mayen-Koblenz"
+                    title="Landkreis Mayen-Koblenz">Landkreis Mayen-Koblenz</a>) in der <a href="/wiki/Vulkaneifel"
+                    title="Vulkaneifel">Vulkaneifel</a>. Sie gehört zur Pfarreiengemeinschaft Mayen, Teil des Dekanats
+                Mayen-Mendig im <a href="/wiki/Bistum_Trier" title="Bistum Trier">Bistum Trier</a>.
+            </p>
+            <small id="citation">
+                Seite „Herz-Jesu-Kirche (Mayen)“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 31. August
+                2020, 07:42 UTC. URL:
+                https://de.wikipedia.org/w/index.php?title=Herz-Jesu-Kirche_(Mayen)&oldid=203265972 (Abgerufen: 10.
+                Oktober 2020, 12:52 UTC).
+
+            </small>
+        </section>
+        <section id="obertor">
+            <h3>Obertor</h3>
+            <p>
+                <<a title="A.Savin (Wikimedia Commons · WikiPhotoSpace) / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Mayen-obertor.jpg"><img width="256"
+                        alt="Mayen-obertor"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Mayen-obertor.jpg/256px-Mayen-obertor.jpg"></a>
+                    Das Obertor liegt an der Einmündung der Straße Am Obertor in den Stadtring an der Ecke
+                    Habsburgring/Boemundring. Neben dem Obertor steht das Theodore-Dreiser-Haus, benannt nach dem
+                    amerikanischen Schriftsteller Theodore Dreiser (1871–1945), Sohn eines Mayener Auswanderers. Heute
+                    ist hier die Stadtbücherei untergebracht.
+            </p>
+            <small id="citation">
+                Seite „Obertor (Mayen)“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 5. Dezember 2019,
+                18:18 UTC. URL: https://de.wikipedia.org/w/index.php?title=Obertor_(Mayen)&oldid=194663327
+                (Abgerufen: 10. Oktober 2020, 12:49 UTC)
+            </small>
+        </section>
+        <section id="pfarrkirche-st-clemens">
+            <h3> Pfarrkirche St. Clemens</h3>
+            <p>
+                <a title="Wolkenkratzer / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Mayen,_St._Clemens_016x.jpg"><img width="512"
+                        alt="Mayen, St. Clemens 016x"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Mayen%2C_St._Clemens_016x.jpg/512px-Mayen%2C_St._Clemens_016x.jpg"></a>
+                Die Pfarrkirche des ehemaligen Hauptorts des Mayengaus (mit einst großräumigem Pfarrsprengel) war
+                ehemals der und ist seit 1409 dem heiligen Papst <a href="/wiki/Clemens_von_Rom"
+                    title="Clemens von Rom">Clemens</a> geweiht. Von 1326 bis 1802 war sie <a
+                    href="/wiki/Stift_(Kirche)" title="Stift (Kirche)">Stiftskirche</a>
+
+            </p>
+            <small id="citation">
+                Seite „St. Clemens (Mayen)“. In:
+                Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 28. März 2020, 17:13 UTC. URL:
+                https://de.wikipedia.org/w/index.php?title=St._Clemens_(Mayen)&oldid=198199509 (Abgerufen: 10. Oktober
+                2020, 12:46 UTC).
+            </small>
+        </section>
+        <section id="marktbrunnen">
+            <h3>Marktbrunnen</h3>
+            <p>
+                <a title="Goldener Käfer / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Marktbrunnen_Mayen_Frontansicht.JPG"><img width="256"
+                        alt="Marktbrunnen Mayen Frontansicht"
+                        src="https://upload.wikimedia.org/wikipedia/commons/b/be/Marktbrunnen_Mayen_Frontansicht.JPG"></a>
+                Der <a href="/wiki/Brunnen" title="Brunnen">Brunnen</a> wurde vom <a href="/wiki/Baumeister"
+                    title="Baumeister">Baumeister</a> <i>Johann Michael Alken</i> entworfen und gehört in Mayen zu den
+                wenigen erhaltenen Beispielen <a href="/wiki/Klassizismus" title="Klassizismus">klassizistischer</a> <a
+                    href="/wiki/Architektur" title="Architektur">Architektur</a>.
+            </p>
+            <small id="citation">
+
+                Seite „Marktbrunnen (Mayen)“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 21. August 2020,
+                13:14 UTC. URL: https://de.wikipedia.org/w/index.php?title=Marktbrunnen_(Mayen)&oldid=202971711
+                (Abgerufen: 10. Oktober 2020, 12:58 UTC).
+            </small>
+        </section>
+        <section id="juedischerfriedhof">
+            <h3>Jüdischer Friedhof</h3>
+            <p>
+                <a title="GFreihalter / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Mayen_J%C3%BCdischer_Friedhof_Tafel_698.JPG"><img
+                        width="256" alt="Mayen Jüdischer Friedhof Tafel 698"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Mayen_J%C3%BCdischer_Friedhof_Tafel_698.JPG/256px-Mayen_J%C3%BCdischer_Friedhof_Tafel_698.JPG"></a>
+                Der <b>Jüdische Friedhof Mayen</b> ist ein <a href="/wiki/J%C3%BCdischer_Friedhof"
+                    title="Jüdischer Friedhof">jüdischer Friedhof</a> in <a href="/wiki/Mayen" title="Mayen">Mayen</a>,
+                einer <a href="/wiki/Stadt" title="Stadt">Stadt</a> im <a href="/wiki/Landkreis_Mayen-Koblenz"
+                    title="Landkreis Mayen-Koblenz">Landkreis Mayen-Koblenz</a> in <a href="/wiki/Rheinland-Pfalz"
+                    title="Rheinland-Pfalz">Rheinland-Pfalz</a>. Der Friedhof ist ein geschütztes <a
+                    href="/wiki/Liste_der_Kulturdenkm%C3%A4ler_in_Mayen"
+                    title="Liste der Kulturdenkmäler in Mayen">Kulturdenkmal</a> und befindet sich in der Waldstraße,
+                einer <a href="/wiki/Sackgasse" title="Sackgasse">Sackstraße</a> in einem Wohnviertel.
+            </p>
+            <small id="citation">
+                Seite „Jüdischer Friedhof (Mayen)“. In: Wikipedia, Die freie Enzyklopädie.
+                Bearbeitungsstand: 8.
+                September 2019, 22:01 UTC. URL:
+                https://de.wikipedia.org/w/index.php?title=J%C3%BCdischer_Friedhof_(Mayen)&oldid=192096795 (Abgerufen:
+                10. Oktober 2020, 13:02 UTC)
+            </small>
+
+        </section>
+        <section id="grubenfelder">
+            <h3>Mayener Grubenfelder</h3>
+            <p>
+                <a title="Tetris L / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)"
+                    href="https://commons.wikimedia.org/wiki/File:Mayener_Grubenfeld_-_Steinbruch_(7)_cropped.jpg"><img
+                        width="512" alt="Mayener Grubenfeld - Steinbruch (7) cropped"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Mayener_Grubenfeld_-_Steinbruch_%287%29_cropped.jpg/512px-Mayener_Grubenfeld_-_Steinbruch_%287%29_cropped.jpg"></a>
+                Das <b>Mayener Grubenfeld</b>, seltener auch <i>Mayener <a href="/wiki/Ley"
+                        title="Ley">Lay/Ley(en)</a></i> genannt, ist ein ehemaliges <a href="/wiki/Bergbau"
+                    title="Bergbau">Abbau</a>-Gebiet<sup id="cite_ref-Anm._Grubenfeld_2-0" class="reference"><a
+                        href="#cite_note-Anm._Grubenfeld-2">[Anm 1]</a></sup> für <a href="/wiki/Basalt"
+                    title="Basalt">Basaltgestein</a> (<a href="/wiki/Mayener_Basaltlava"
+                    title="Mayener Basaltlava">Mayener Basaltlava</a>) am nordöstlichen Rand der Stadt <a
+                    href="/wiki/Mayen" title="Mayen">Mayen</a> in der <a href="/wiki/Osteifel" class="mw-redirect"
+                    title="Osteifel">östlichen</a> <a href="/wiki/Vulkaneifel" title="Vulkaneifel">Vulkaneifel</a>
+                (Vordereifel) in <a href="/wiki/Rheinland-Pfalz" title="Rheinland-Pfalz">Rheinland-Pfalz</a>.<sup
+                    id="cite_ref-Mayen_3-0" class="reference"><a href="#cite_note-Mayen-3">[2]</a>
+            </p>
+            <small id="citation">
+                Seite „Mayener Grubenfeld“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 23. August
+                2020, 09:53 UTC. URL:
+                https://de.wikipedia.org/w/index.php?title=Mayener_Grubenfeld&oldid=203022576
+                (Abgerufen: 10. Oktober 2020, 13:04 UTC)
+            </small>
+
+        </section>
+        <section id="katzenberg">
+            <h3>Spätrömische Höhenbefestigung Katzenberg</h3>
+            <p>
+                <a title="Holger Weinandt / CC BY-SA 3.0 DE (https://creativecommons.org/licenses/by-sa/3.0/de/deed.en)"
+                    href="https://commons.wikimedia.org/wiki/File:Wehrmauer_R%C3%B6mische_H%C3%B6henbefestigung_Katzenberg_Mayen_2010.jpg"><img
+                        width="512" alt="Wehrmauer Römische Höhenbefestigung Katzenberg Mayen 2010"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Wehrmauer_R%C3%B6mische_H%C3%B6henbefestigung_Katzenberg_Mayen_2010.jpg/512px-Wehrmauer_R%C3%B6mische_H%C3%B6henbefestigung_Katzenberg_Mayen_2010.jpg"></a>
+                Die <b>Spätrömische Höhenbefestigung Katzenberg</b>, auch Römerwarte Mayen genannt, ist eine römische <a
+                    href="/wiki/Fliehburg" title="Fliehburg">Fliehburg</a> aus dem 4. Jahrhundert bei <a
+                    href="/wiki/Mayen" title="Mayen">Mayen</a>.
+
+            </p>
+            <small id="citation">
+                Seite „Spätrömische Höhenbefestigung Katzenberg“. In: Wikipedia, Die freie Enzyklopädie.
+                Bearbeitungsstand: 28. Juni 2020, 12:04 UTC. URL:
+                https://de.wikipedia.org/w/index.php?title=Sp%C3%A4tr%C3%B6mische_H%C3%B6henbefestigung_Katzenberg&oldid=201380222
+                (Abgerufen: 10. Oktober 2020, 13:31 UTC)
+            </small>
+        </section>
+
+        <section id="schlossbueressheim">
+            <h3>Schloss Bürresheim</h3>
+            <p>
+                <a title="Klaus Graf / CC BY 2.0 DE (https://creativecommons.org/licenses/by/2.0/de/deed.en)"
+                    href="https://commons.wikimedia.org/wiki/File:Buerresheim_1.jpg"><img width="512"
+                        alt="Buerresheim 1"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Buerresheim_1.jpg/512px-Buerresheim_1.jpg"></a>
+                Das <b>Schloss Bürresheim</b> steht nordwestlich von <a href="/wiki/Mayen" title="Mayen">Mayen</a> auf
+                einem <a href="/wiki/Felssporn" title="Felssporn">Felssporn</a> im <a href="/wiki/Nette_(Mittelrhein)"
+                    title="Nette (Mittelrhein)">Nettetal</a>. Es gehört zur Ortsgemeinde <a
+                    href="/wiki/Sankt_Johann_(bei_Mayen)" title="Sankt Johann (bei Mayen)">Sankt Johann</a>. Gemeinsam
+                mit <a href="/wiki/Burg_Eltz" title="Burg Eltz">Burg Eltz</a> und der <a href="/wiki/Burg_Lissingen"
+                    title="Burg Lissingen">Burg Lissingen</a> ist es eine der wenigen Anlagen in der <a
+                    href="/wiki/Eifel" title="Eifel">Eifel</a>, die niemals erobert oder verwüstet wurden und die Kriege
+                des 17. und 18.&nbsp;Jahrhunderts sowie die gesellschaftlichen Umbrüche der <a
+                    href="/wiki/Franz%C3%B6sische_Revolution" title="Französische Revolution">Französischen
+                    Revolution</a> unversehrt überstehen konnten.
+
+            </p>
+            <small id="citation">
+                Seite „Schloss Bürresheim“. In: Wikipedia, Die freie Enzyklopädie. Bearbeitungsstand: 13. Mai 2020,
+                07:00 UTC. URL: https://de.wikipedia.org/w/index.php?title=Schloss_B%C3%BCrresheim&oldid=199904832
+                (Abgerufen: 10. Oktober 2020, 13:11 UTC)
+            </small>
+        </section>
+    </div>
+    <script>
+        
+        var map = new maplibregl.Map({
+            container: 'map',
+            style: 'https://api.maptiler.com/maps/streets/style.json?key=' + config.MAPTILER_TOKEN,
+            center: [7.221275, 50.326111],
+            zoom: 16.5,
+            bearing: 27,
+            pitch: 45
+        });
+
+        var chapters = {
+            'genovevaburg': {
+                bearing: 27,
+                center: [7.221275, 50.326111],
+                zoom: 17.5,
+                pitch: 20
+            },
+            'pfarrkirche-herz-jesu': {
+                duration: 6000,
+                center: [7.222546, 50.327054],
+                bearing: 150,
+                zoom: 18,
+                pitch: 0
+            },
+            'obertor': {
+                bearing: 90,
+                center: [7.21869, 50.328],
+                zoom: 17,
+                speed: 0.6,
+                pitch: 40
+            },
+            'pfarrkirche-st-clemens': {
+                bearing: 90,
+                center: [7.223178, 50.329886],
+                zoom: 18.3
+            },
+            'marktbrunnen': {
+                bearing: 45,
+                center: [7.22026, 50.32824],
+                zoom: 17.0,
+                pitch: 20,
+                speed: 0.5
+            },
+            'juedischerfriedhof': {
+                bearing: 180,
+                center: [7.217717, 50.33347],
+                zoom: 15.3
+            },
+            'grubenfelder': {
+                bearing: 90,
+                center: [7.24091, 50.33454],
+                zoom: 15.2,
+                pitch: 40
+            },
+            'katzenberg': {
+                bearing: 90,
+                center: [7.243889, 50.32],
+                zoom: 14.5,
+                pitch: 20
+            },
+            'schlossbueressheim': {
+                bearing: 90,
+                center: [7.179708, 50.352792],
+                zoom: 12.3,
+                pitch: 20
+            }
+        };
+
+        // On every scroll event, check which element is on screen
+        window.onscroll = function () {
+            var chapterNames = Object.keys(chapters);
+            for (var i = 0; i < chapterNames.length; i++) {
+                var chapterName = chapterNames[i];
+                if (isElementOnScreen(chapterName)) {
+                    setActiveChapter(chapterName);
+                    break;
+                }
+            }
+        };
+
+        var activeChapterName = 'genovevaburg';
+        function setActiveChapter(chapterName) {
+            if (chapterName === activeChapterName) return;
+
+            map.flyTo(chapters[chapterName]);
+
+            document.getElementById(chapterName).setAttribute('class', 'active');
+            document.getElementById(activeChapterName).setAttribute('class', '');
+
+            activeChapterName = chapterName;
+        }
+
+        function isElementOnScreen(id) {
+            var element = document.getElementById(id);
+            var bounds = element.getBoundingClientRect();
+            return bounds.top < window.innerHeight && bounds.bottom > 0;
+        }
+    </script>
+
+</body>
+
+</html>

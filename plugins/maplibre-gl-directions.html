@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Display driving directions</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../.env"></script>
+    <script src="https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.js"></script>
+    <link
+      href="https://unpkg.com/maplibre-gl@1.14.0-rc.1/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+      type="text/css"
+    />
+    <div id="map"></div>
+
+    <script>
+      new MapboxDirections({
+        accessToken: config.MAPBOX_TOKEN,
+        unit: "metric",
+        profile: "mapbox/driving",
+        flyTo: false,
+        controls: {
+          inputs: false,
+          instructions: true,
+          profileSwitcher: false,
+        },
+        exclude: "ferry",
+      });
+
+      var map = new maplibregl.Map({
+        container: "map",
+        style:
+          "https://api.maptiler.com/maps/streets/style.json?key=" +
+          config.MAPTILER_TOKEN,
+        center: [-4.488582, 36.86133],
+        zoom: 15,
+      });
+
+      var directions = new MapboxDirections({
+        accessToken: maplibregl.accessToken,
+        language: "de-DE",
+        steps: true,
+        exclude: "toll",
+        unit: "metric",
+        interactive: false,
+        controls: "true",
+        profile: "mapbox/driving",
+        flyTo: false,
+      });
+
+      var marker1 = new maplibregl.Marker()
+        .setLngLat([1.81108, 47.069302])
+        .addTo(map);
+      var marker2 = new maplibregl.Marker()
+        .setLngLat([-0.610723, 43.185493])
+        .addTo(map);
+      var marker3 = new maplibregl.Marker()
+        .setLngLat([-3.479979, 39.819714])
+        .addTo(map);
+
+      /*        directions.on('route', e => {
+                    let routes = e.route
+                    routes.map(r => r.legs[0].steps[0].name)
+                    tail = routes.map(r => r.legs[0].steps)
+                    var i;
+                    for (i = 0; i < tail[0].length; i++) {
+                        console.log(
+                            i + ': ' + tail[0][i].maneuver.location[0] + '---' + tail[0][i].maneuver.location[1]
+                        );
+                    }
+                });*/
+
+      this.map.on("load", () => {
+        showRoute();
+      });
+
+      function showRoute() {
+        directions.setOrigin("kehrig");
+        directions.setDestination("-4.488582, 36.861330");
+        // directions.addWaypoint(1, [-1.497526, 43.307164]);
+      }
+      map.addControl(directions, "top-left");
+    </script>
+  </body>
+</html>
