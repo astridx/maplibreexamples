@@ -28,7 +28,7 @@
           this.mapStyleContainer = document.createElement("div");
           this.styleButton = document.createElement("button");
           this.styleButton.type = "button";
-          this.mapStyleContainer.classList.add("mapboxgl-style-list");
+          this.mapStyleContainer.classList.add("maplibregl-style-list");
           for (const style of this.styles) {
             const styleElement = document.createElement("button");
             styleElement.type = "button";
@@ -136,11 +136,11 @@
     </script>
 
     <style>
-      .mapboxgl-style-list {
+      .maplibregl-style-list {
         display: none;
       }
 
-      .mapboxgl-ctrl-group .mapboxgl-style-list button {
+      .mapboxgl-ctrl-group .maplibregl-style-list button {
         background: none;
         border: none;
         cursor: pointer;
@@ -152,15 +152,15 @@
         height: auto;
       }
 
-      .mapboxgl-style-list button.active {
+      .maplibregl-style-list button.active {
         font-weight: bold;
       }
 
-      .mapboxgl-style-list button:hover {
+      .maplibregl-style-list button:hover {
         background-color: rgba(0, 0, 0, 0.05);
       }
 
-      .mapboxgl-style-list button + button {
+      .maplibregl-style-list button + button {
         border-top: 1px solid #ddd;
       }
 
@@ -174,7 +174,7 @@
   </head>
 
   <body>
-    <h2 style="font-family: sans-serif">Mapbox style switcher</h2>
+    <h2 style="font-family: sans-serif">MapLibre style switcher</h2>
     <div id="map" style="height: 60%"></div>
     <script>
       const map = new maplibregl.Map({
