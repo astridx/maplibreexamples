@@ -23,8 +23,8 @@
         onAdd(map) {
           this.map = map;
           this.controlContainer = document.createElement("div");
-          this.controlContainer.classList.add("mapboxgl-ctrl");
-          this.controlContainer.classList.add("mapboxgl-ctrl-group");
+          this.controlContainer.classList.add("maplibregl-ctrl");
+          this.controlContainer.classList.add("maplibregl-ctrl-group");
           this.mapStyleContainer = document.createElement("div");
           this.styleButton = document.createElement("button");
           this.styleButton.type = "button";
@@ -140,7 +140,7 @@
         display: none;
       }
 
-      .mapboxgl-ctrl-group .maplibregl-style-list button {
+      .maplibregl-ctrl-group .maplibregl-style-list button {
         background: none;
         border: none;
         cursor: pointer;
